@@ -13,7 +13,10 @@ def throttle():
 
 @app.route('/health')
 def health():
-    return jsonify(status="healthy"), 200
+    try:
+        return jsonify(status="healthy"), 200
+    except Exception as e:
+        return jsonify(status="unhealthy", error=str(e)), 500
 
 if __name__ == "__main__":
     app.run(debug=True, port=7000)
